@@ -3,6 +3,7 @@ const express = require('express');
 const layouts = require('express-ejs-layouts');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('./config/ppConfig');
 const app = express();
 
 // Environment variables 
@@ -24,7 +25,9 @@ app.use(session({
   saveUninitialized: true    // If we have a new session, we save it, therefore making that true
 }));
 
-// add passport
+// add passport 
+app.use(passport.initialize());      // Initialize passport
+app.use(passport.session());         // Add a session
 
 app.use((req, res, next) => {
   console.log(res.locals);
